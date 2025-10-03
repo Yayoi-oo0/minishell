@@ -6,16 +6,18 @@
 /*   By: oyayoi <oyayoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 21:54:51 by okamotoyayo       #+#    #+#             */
-/*   Updated: 2025/10/03 23:29:21 by oyayoi           ###   ########.fr       */
+/*   Updated: 2025/10/04 00:03:46 by oyayoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <errno.h>
+#include <stdlib.h>
 
 int	builtin_echo(char **argv);
+int	builtin_pwd(void);
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -67,8 +69,8 @@ int	exec_builtin(char **argv)
 		return (builtin_echo(argv));
 	// else if (ft_strcmp(argv[0], "cd") == 0)
 	// 	return (builtin_cd(argv));
-	// else if (ft_strcmp(argv[0], "pwd") == 0)
-	// 	return (builtin_pwd());
+	else if (ft_strcmp(argv[0], "pwd") == 0)
+		return (builtin_pwd());
 	// else if (ft_strcmp(argv[0], "export") == 0)
 	// 	return (builtin_export(argv));
 	// else if (ft_strcmp(argv[0], "unset") == 0)
@@ -126,9 +128,24 @@ int	builtin_echo(char **argv)
 	return (0);
 }
 
+int	builtin_pwd(void)
+{
+	char	*pwd_path;
+
+	pwd_path = getcwd(NULL, 0);
+	if (pwd_path == NULL)
+	{
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		return (1);
+	}
+	printf("%s\n", pwd_path);
+	free(pwd_path);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	if (argc > 1)
-		builtin_echo(argv);
+		exec_builtin(&argv[1]);
 	return (0);
 }
