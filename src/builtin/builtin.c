@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyayoi <oyayoi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: okamotoyayoi <okamotoyayoi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 21:54:51 by okamotoyayo       #+#    #+#             */
-/*   Updated: 2025/10/02 22:53:35 by oyayoi           ###   ########.fr       */
+/*   Updated: 2025/10/03 14:02:20 by okamotoyayo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -74,7 +74,16 @@ int	exec_builtin(char **argv)
 		return (0);
 }
 
+int	check_n_option(char *opt)
+{
+	int i;
+	i = 1;
+	if (!opt)
+		return (0);
+	
+}
+
 int	builtin_echo(char **argv)
 {
-	
+	while (*argv && )
 }
